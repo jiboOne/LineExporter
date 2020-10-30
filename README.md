@@ -10,8 +10,8 @@ Simple Text File manager written in Java, basic features:
 
 Following command starts application:
  
-    java -jar lineExporter.jar "S" "queryText" "D:\logs\input" "D:\logs\output" "D:\logs\log"
-    java -jar lineExporter.jar "R" "queryText" "D:\logs\input" "D:\logs\output" "D:\logs\log"
+    java -jar lineExporter-0.0.1.jar "S" "queryText" "D:\logs\input" "D:\logs\output" "D:\logs\log"
+    java -jar lineExporter-0.0.1.jar "R" "queryText" "D:\logs\input" "D:\logs\output" "D:\logs\log"
 
 
 * **S** - export all line which contains "some queryText"
