@@ -14,8 +14,8 @@ Following command starts application:
     java -jar lineExporter-0.0.1.jar "R" "queryText" "inputFile" "outputFile" "logFile"
 
 
-* **S** - export all line which contains "some queryText"
-* **R** - export all line which does not contains "some queryText"
+* **S** - export all line which contains "queryText"
+* **R** - export all line which does not contains "queryText"
 * **queryText** - any text you want to searchin file/files
 * **inputFile** - input file address example: *D:\logs\input.txt*, parameter is optional (default value is same directory)
 * **outputFile** - output file address example: *D:\logs\outout.txt*, parameter is optional (default value is same directory)
