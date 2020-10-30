@@ -17,6 +17,8 @@ import java.util.stream.Stream;
 @SpringBootApplication
 public class LineExporterApplication {
 
+  final static LogHelper logger = new LogHelper();
+
   public static void main(String[] args) throws IOException {
     SpringApplication.run(LineExporterApplication.class, args);
     Configuration conf = new Configuration(args);
@@ -25,31 +27,23 @@ public class LineExporterApplication {
                                                 .map(Path::toAbsolutePath)
                                                 .map(Path::toString)
                                                 .collect(Collectors.toList());
-      final FileOutputStream log = new FileOutputStream(conf.getLogFilePath() + "/log.txt");
+      final FileOutputStream logOutStream = new FileOutputStream(conf.getLogFilePath() + "/log.txt");
 
-      LogHelper logger = new LogHelper(log);
-      logger.logRequestDetails(conf);
+      logger.logRequestDetails(logOutStream, conf);
 
       BufferedReader fileBufferReader;
       FileOutputStream outputStream;
-      File file = null;
-      Scanner sc = null;
       String line;
 
       for (String filePath : listOfFilePaths) {
-        fileBufferReader = null;
-        outputStream = null;
         if (!filePath.contains(".jar") && !filePath.contains("log.txt")) {
-          logger.writeIntoFile(log, new Date() + " - Parsing File: " + filePath);
-
           String fileName = getFileName(filePath);
-
           outputStream = new FileOutputStream(conf.getOutFilePath() + fileName + "_exported.txt");
           fileBufferReader = new BufferedReader(new FileReader(filePath));
 
           try {
             System.out.println(new Date() + " - Line Export Started For " + filePath + " file");
-            logger.writeIntoFile(log, new Date() + " - Line Export Started For " + filePath + " file");
+            logger.writeIntoFile(logOutStream, new Date() + " - Line Export Started For " + filePath + " file");
             if (conf.getQueryText() != null && conf.getRequestType() == RequestType.Remove) {
               while ((line = fileBufferReader.readLine()) != null) {
                 if (conf.getQueryText() != null && !line.contains(conf.getQueryText())) {
@@ -65,14 +59,14 @@ public class LineExporterApplication {
             }
           } finally {
             System.out.println(new Date() + " - Line Export Finished for " + filePath + " file");
-            logger.writeIntoFile(log, (new Date() + " - Line Export Finished for " + filePath + " file"));
+            logger.writeIntoFile(logOutStream, (new Date() + " - Line Export Finished for " + filePath + " file"));
             fileBufferReader.close();
             outputStream.close();
           }
         }
       }
       System.out.println(new Date() + " - *** LineExporter Finished ***");
-      logger.writeIntoFile(log, (new Date() + " - *** LineExporter Started ***"));
+      logger.writeIntoFile(logOutStream, (new Date() + " - *** LineExporter Started ***"));
     }
   }
 
