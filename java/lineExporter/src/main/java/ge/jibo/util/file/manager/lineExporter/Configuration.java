@@ -20,7 +20,7 @@ public class Configuration {
     if (args.length > 1 && args[1] != null && !args[1].isEmpty()) {
       this.searchText = args[1];
     } else {
-      this.searchText = "command = C6";
+      this.searchText = "command = C";
     }
 
     if (args.length > 2 && args[2] != null && !args[2].isEmpty()) {
