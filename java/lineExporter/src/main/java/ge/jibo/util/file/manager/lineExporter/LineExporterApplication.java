@@ -46,7 +46,7 @@ public class LineExporterApplication {
             logger.writeIntoFile(logOutStream, new Date() + " - Line Export Started For " + filePath + " file");
             if (conf.getQueryText() != null && conf.getRequestType() == RequestType.Remove) {
               while ((line = fileBufferReader.readLine()) != null) {
-                if (conf.getQueryText() != null && !line.contains(conf.getQueryText())) {
+                if (!line.contains(conf.getQueryText())) {
                   logger.writeIntoFile(outputStream, line);
                 }
               }
