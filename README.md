@@ -17,9 +17,9 @@ Following command starts application:
 * **S** - export all line which contains "some queryText"
 * **R** - export all line which does not contains "some queryText"
 * **queryText** - any text you want to searchin file/files
-* **inputFile** - input file address example: *D:\logs\input.txt*, parameter is optional (default value same directory)
-* **outputFile** - output file address example: *D:\logs\outout.txt*, parameter is optional (default value same directory)
-* **logFile** - log file address example: *D:\logs\log.txt*, parameter is optional (default value same directory)
+* **inputFile** - input file address example: *D:\logs\input.txt*, parameter is optional (default value is same directory)
+* **outputFile** - output file address example: *D:\logs\outout.txt*, parameter is optional (default value is same directory)
+* **logFile** - log file address example: *D:\logs\log.txt*, parameter is optional (default value is same directory)
 
 Obviously Java (at least 1.8) is needed to run the application.
 
