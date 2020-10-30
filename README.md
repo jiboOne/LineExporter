@@ -3,8 +3,8 @@ LineExporter
 
 Simple Text File manager written in Java, basic features:
 
-* Read files and export required lines.
-* Read large files efectivelly.
+* Read files and export required lines
+* Read large files efectivelly
 
 **How to run**:
 
