@@ -17,6 +17,8 @@ import java.util.stream.Stream;
 @SpringBootApplication
 public class LineExporterApplication {
 
+  final static LogHelper logger = new LogHelper();
+
   public static void main(String[] args) throws IOException {
     SpringApplication.run(LineExporterApplication.class, args);
     Configuration conf = new Configuration(args);
@@ -25,20 +27,15 @@ public class LineExporterApplication {
                                                 .map(Path::toAbsolutePath)
                                                 .map(Path::toString)
                                                 .collect(Collectors.toList());
-      final FileOutputStream log = new FileOutputStream(conf.getLogFilePath() + "/log.txt");
 
-      LogHelper logger = new LogHelper(log);
-      logger.logRequestDetails(conf);
+      final FileOutputStream log = new FileOutputStream(conf.getLogFilePath() + "/log.txt");
+      logger.logRequestDetails(log, conf);
 
       BufferedReader fileBufferReader;
       FileOutputStream outputStream;
-      File file = null;
-      Scanner sc = null;
       String line;
 
       for (String filePath : listOfFilePaths) {
-        fileBufferReader = null;
-        outputStream = null;
         if (!filePath.contains(".jar") && !filePath.contains("log.txt")) {
           logger.writeIntoFile(log, new Date() + " - Parsing File: " + filePath);
 
