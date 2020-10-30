@@ -21,7 +21,6 @@ public class Configuration {
       this.searchText = args[1];
     } else {
       this.searchText = "command = C";
-
     }
 
     if (args.length > 2 && args[2] != null && !args[2].isEmpty()) {
