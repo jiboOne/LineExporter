@@ -70,23 +70,24 @@ public class LineExporterApplication {
         outputStream = null;
         if (!filePath.contains(".jar") && !filePath.contains("log.txt")) {
           writeIntoFile(log, new Date() + " - Parsing File: " + filePath);
-          String fileName = "";
-          if (filePath.contains(".") && filePath.contains("\\") && filePath.lastIndexOf("\\") < filePath.lastIndexOf(".")) {
-            fileName = filePath.substring(filePath.lastIndexOf("\\"), filePath.lastIndexOf("."));
-          }
+
+          String fileName = getFileName(filePath);
+
           outputStream = new FileOutputStream(conf.getOutFilePath() + fileName + "_exported.txt");
           fileBufferReader = new BufferedReader(new FileReader(filePath));
 
           try {
             System.out.println(new Date() + " - Line Export Started For " + filePath + " file");
             writeIntoFile(log, new Date() + " - Line Export Started For " + filePath + " file");
-            while ((line = fileBufferReader.readLine()) != null) {
-              if (conf.getRequestType() == RequestType.Remove) {
+            if (conf.getQueryText() != null && conf.getRequestType() == RequestType.Remove) {
+              while ((line = fileBufferReader.readLine()) != null) {
                 if (conf.getQueryText() != null && !line.contains(conf.getQueryText())) {
                   writeIntoFile(outputStream, line);
                 }
-              } else if (conf.getRequestType() == RequestType.Search) {
-                if (conf.getQueryText() != null && line.contains(conf.getQueryText())) {
+              }
+            } else if (conf.getQueryText() != null && conf.getRequestType() == RequestType.Search) {
+              while ((line = fileBufferReader.readLine()) != null) {
+                if (line.contains(conf.getQueryText())) {
                   writeIntoFile(outputStream, line);
                 }
               }
@@ -102,5 +103,13 @@ public class LineExporterApplication {
       System.out.println(new Date() + " - *** LineExporter Finished ***");
       writeIntoFile(log, (new Date() + " - *** LineExporter Started ***"));
     }
+  }
+
+  private static String getFileName(String filePath) {
+    String fileName = "";
+    if (filePath.contains(".") && filePath.contains("\\") && filePath.lastIndexOf("\\") < filePath.lastIndexOf(".")) {
+      fileName = filePath.substring(filePath.lastIndexOf("\\"), filePath.lastIndexOf("."));
+    }
+    return fileName;
   }
 }
