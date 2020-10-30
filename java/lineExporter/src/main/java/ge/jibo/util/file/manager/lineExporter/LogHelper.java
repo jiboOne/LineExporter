@@ -6,6 +6,12 @@ import java.util.Date;
 
 public class LogHelper {
 
+  FileOutputStream outputStream;
+
+  public LogHelper(FileOutputStream outputStream) {
+    this.outputStream = outputStream;
+  }
+
   public void writeIntoFile(FileOutputStream out, String text) {
     try {
       out.write(text.getBytes());
@@ -15,7 +21,7 @@ public class LogHelper {
     }
   }
 
-  public void logRequestDetails(FileOutputStream outputStream, Configuration conf) {
+  public void logRequestDetails(Configuration conf) {
     System.out.println(new Date() + " - *** LineExporter Started ***");
     writeIntoFile(outputStream, new Date() + " - *** LineExporter Started ***");
 
