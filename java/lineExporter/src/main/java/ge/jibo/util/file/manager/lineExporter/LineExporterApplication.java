@@ -65,7 +65,7 @@ public class LineExporterApplication {
           }
         }
       }
-      System.out.println(new Date() + " - *** LineExporter Finisheds ***");
+      System.out.println(new Date() + " - *** LineExporter Finished ***");
       logger.writeIntoFile(logOutStream, (new Date() + " - *** LineExporter Started ***"));
     }
   }
